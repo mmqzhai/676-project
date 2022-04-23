@@ -37,5 +37,4 @@ with open(sys.argv[2], 'r') as f_impacts:
 			else:
 				continue
 		merged = {**orbit, **row}
-		merged['Object Name'] = name
 		writer.writerow(merged)
