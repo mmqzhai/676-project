@@ -4,7 +4,7 @@ import os, sys
 import csv
 
 if len(sys.argv) != 3:
-	print('usage:', sys.argv[0], 'orbits-file impacts-file')
+	print('usage:', sys.argv[0], 'orbits-file impacts-file > merged-file')
 	exit(1)
 
 all_orbits = {}
