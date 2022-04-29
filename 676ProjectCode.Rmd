@@ -1,0 +1,30 @@
+---
+title: "676 Project"
+output: html_notebook
+---
+
+```{r}
+library(brms)
+dat <- read.csv("https://raw.githubusercontent.com/mmqzhai/676-project/main/merged.csv", header = TRUE)
+head(dat)
+summary(dat)
+```
+
+```{r}
+fit <- brm(log(Cumulative.Impact.Probability) ~ 1 + (1 + Orbit.Eccentricity + Perihelion.Distance..AU. + Asteroid.Magnitude + Cumulative.Palermo.Scale | Object.Classification) + Orbit.Eccentricity + Perihelion.Distance..AU. + Asteroid.Magnitude + Cumulative.Palermo.Scale, data = dat, chains = 1, iter = 1000, warmup = 500)
+
+summary(fit)
+plot(fit)
+
+# Did we build our model correctly? Check qqplots. Undo transformation (exponential) for probability interpretation. 
+# Summary interpretation?
+# Look at group level effects
+
+# Build a model to predict which asteroid has highest probability of impact?
+
+y <- predict(fit)
+prob <- data.frame(exp(y))
+prob[which.max(prob$Estimate), ]
+dat[567,]
+```
+
